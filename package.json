@@ -1,0 +1,63 @@
+{
+  "name": "docs-func-aws-template-list-v1",
+  "version": "0.0.1",
+  "private": true,
+  "license": "UNLICENSED",
+  "description": "Document engine template list",
+  "author": "Document engine contributors",
+  "keywords": [
+    "yarn"
+  ],
+  "scripts": {
+    "build": "openapi-generator-cli generate -g typescript-node --global-property model -i docs/document-api-template-list-v1.yaml -o src && tsc",
+    "test": "npm run build && node built/app.js",
+    "commit": "cz",
+    "lint:format": "eslint --fix packages/"
+  },
+  "dependencies": {
+    "aws-sdk": "2.1333.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.111",
+    "@types/node": "^18",
+    "@types/request": "^2.48.8",
+    "typescript": "^4.9",
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.36.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.0",
+    "prettier": "^2.8.4",
+    "validate-branch-name": "^1.3.0",
+    "@openapitools/openapi-generator-cli": "^2.5.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard"
+  },
+  "lint-staged": {
+    "packages/**/*.+(js|sx|ts|tsx)": [
+      "eslint --fix ./",
+      "prettier --write"
+    ]
+  },
+  "validate-branch-name": {
+    "pattern": "^main$|^release/(v\\d+.\\d+.\\d+){1}$|^prerelease/(v\\d+.\\d+.\\d+){1}$|^(feature|fix){1}/(BSSN-\\d+){1}$",
+    "errorMsg": "🤦‍♀️ branch name does not comply with the repository conventions"
+  },
+  "resolutions": {
+    "ansi-regex": "^5.0.1",
+    "minimist": "^1.2.6"
+  }
+}
