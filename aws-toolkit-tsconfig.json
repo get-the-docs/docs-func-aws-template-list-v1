@@ -1,0 +1,12 @@
+{
+  "compilerOptions" : {
+    "target" : "es6",
+    "module" : "commonjs",
+    "sourceMap" : true,
+    "outDir" : "C:\\projects\\videki\\docs-func-aws-template-list-v2\\aws-toolkit-ts-output",
+    "rootDir" : ".",
+    "sourceRoot" : "C:\\projects\\videki\\docs-func-aws-template-list-v2",
+    "typeRoots" : [ "C:\\projects\\videki\\docs-func-aws-template-list-v2\\node_modules\\@types" ],
+    "types" : [ "node" ]
+  }
+}

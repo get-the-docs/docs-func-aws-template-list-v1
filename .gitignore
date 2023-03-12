@@ -25,12 +25,6 @@ coverage
 # nyc test coverage
 .nyc_output
 
-# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
-.grunt
-
-# Bower dependency directory (https://bower.io/)
-bower_components
-
 # node-waf configuration
 .lock-wscript
 
@@ -67,6 +61,7 @@ typings/
 
 # Yarn Integrity file
 .yarn-integrity
+yarn.lock
 
 # dotenv environment variables file
 .env
@@ -82,23 +77,22 @@ typings/
 .nuxt
 dist
 
-# Gatsby files
-.cache/
-# Comment in the public line in if your project uses Gatsby and *not* Next.js
-# https://nextjs.org/blog/next-9-1#public-directory-support
-# public
+#Intellij
+.idea
 
-# vuepress build output
-.vuepress/dist
+# SAM directories
+.aws-sam
+aws-toolkit-ts-output
+built
+gen
 
-# Serverless directories
-.serverless/
+.husky
 
-# FuseBox cache
-.fusebox/
 
-# DynamoDB Local files
-.dynamodb/
-
-# TernJS port file
-.tern-port
+/src/.openapi-generator/
+/src/api/
+/src/model/
+/src/.gitignore
+/src/.openapi-generator-ignore
+/src/api.ts
+/src/git_push.sh
