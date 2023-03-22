@@ -20,7 +20,7 @@ export class S3Provider {
     } else {
       throw new Error("Bucket name or region not specified.");
     }
-    this._basePath = basePath;
+    this._basePath = basePath ? basePath : "";
 
     this._s3Client = new S3Client({ region: this._region });
   }
@@ -78,7 +78,8 @@ export class S3Provider {
       }
     } catch (error) {
       console.log(error);
-      return [];
+
+      throw new Error("Error retrieving the object list from S3.");
     }
   }
 }

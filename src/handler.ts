@@ -26,13 +26,13 @@ import {
   S3Provider
 } from './service/s3-provider';
 
-const region = process.env["repository.template.provider.aws.s3.region"]!;
-const bucketName = process.env["repository.template.provider.aws.s3.bucketname"]!;
-const prefix = process.env["repository.template.provider.aws.s3.prefix"]!;
-
 export const lambdaHandler = async (event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> => {
   console.log(`Event: ${JSON.stringify(event, null, 2)}`);
   console.log(`Context: ${JSON.stringify(context, null, 2)}`);
+
+  const region = process.env["repository.template.provider.aws.s3.region"]!;
+  const bucketName = process.env["repository.template.provider.aws.s3.bucketname"]!;
+  const prefix = process.env["repository.template.provider.aws.s3.prefix"]!;
 
   const s3Provider : S3Provider = new S3Provider(bucketName, region, prefix);
 
