@@ -37,6 +37,10 @@ describe('Lambda handler tests - happy path', function () {
       memoryLimitInMB: "512"
     };
 
+    process.env["repository_template_provider_aws_s3_region"] = OLD_ENV["repository_template_provider_aws_s3_region"];
+    process.env["repository_template_provider_aws_s3_bucketname"] = OLD_ENV["repository_template_provider_aws_s3_bucketname"];
+    process.env["repository_template_provider_aws_s3_prefix"] = OLD_ENV["repository_template_provider_aws_s3_prefix"];
+
     const result: APIGatewayProxyResult =
       await lambdaHandler(event as APIGatewayProxyEvent, testContext as Context);
 
@@ -63,6 +67,10 @@ describe('Lambda handler tests - happy path', function () {
       clientContext: undefined,
       memoryLimitInMB: "512"
     };
+
+    process.env["repository_template_provider_aws_s3_region"] = OLD_ENV["repository_template_provider_aws_s3_region"];
+    process.env["repository_template_provider_aws_s3_bucketname"] = OLD_ENV["repository_template_provider_aws_s3_bucketname"];
+    process.env["repository_template_provider_aws_s3_prefix"] = OLD_ENV["repository_template_provider_aws_s3_prefix"];
 
     const result: APIGatewayProxyResult =
       await lambdaHandler(event as APIGatewayProxyEvent, testContext as Context);
@@ -91,6 +99,10 @@ describe('Lambda handler tests - happy path', function () {
       memoryLimitInMB: "512"
     };
 
+    process.env["repository_template_provider_aws_s3_region"] = OLD_ENV["repository_template_provider_aws_s3_region"];
+    process.env["repository_template_provider_aws_s3_bucketname"] = OLD_ENV["repository_template_provider_aws_s3_bucketname"];
+    process.env["repository_template_provider_aws_s3_prefix"] = OLD_ENV["repository_template_provider_aws_s3_prefix"];
+
     const result: APIGatewayProxyResult =
       await lambdaHandler(event as APIGatewayProxyEvent, testContext as Context);
 
@@ -116,9 +128,9 @@ describe('Lambda handler tests - negative tests', function () {
 
   it('Param error - Invalid bucket name', async () => {
 
-    process.env["repository.template.provider.aws.s3.region"] = "us-east-2";
-    process.env["repository.template.provider.aws.s3.bucketname"] = "";
-    process.env["repository.template.provider.aws.s3.prefix"] = "";
+    process.env["repository_template_provider_aws_s3_region"] = "us-east-2";
+    process.env["repository_template_provider_aws_s3_bucketname"] = "";
+    process.env["repository_template_provider_aws_s3_prefix"] = "";
 
     const event: APIGatewayProxyEvent = {
     } as any;
@@ -142,9 +154,9 @@ describe('Lambda handler tests - negative tests', function () {
 
   it('Param error - Invalid prefix', async () => {
 
-    process.env["repository.template.provider.aws.s3.region"] = OLD_ENV["repository.template.provider.aws.s3.region"];
-    process.env["repository.template.provider.aws.s3.bucketname"] = OLD_ENV["repository.template.provider.aws.s3.bucketname"];
-    process.env["repository.template.provider.aws.s3.prefix"] = "nonexisting_folder";
+    process.env["repository_template_provider_aws_s3_region"] = OLD_ENV["repository_template_provider_aws_s3_region"];
+    process.env["repository_template_provider_aws_s3_bucketname"] = OLD_ENV["repository_template_provider_aws_s3_bucketname"];
+    process.env["repository_template_provider_aws_s3_prefix"] = "nonexisting_folder";
 
     const event: APIGatewayProxyEvent = {
     } as any;
@@ -172,9 +184,9 @@ describe('Lambda handler tests - negative tests', function () {
 
   it('Param error - Wrong region', async () => {
 
-    process.env["repository.template.provider.aws.s3.region"] = "us-east-2";
-    process.env["repository.template.provider.aws.s3.bucketname"] = OLD_ENV["repository.template.provider.aws.s3.bucketname"];
-    process.env["repository.template.provider.aws.s3.prefix"] = OLD_ENV["repository.template.provider.aws.s3.prefix"];
+    process.env["repository_template_provider_aws_s3_region"] = "us-east-2";
+    process.env["repository_template_provider_aws_s3_bucketname"] = OLD_ENV["repository_template_provider_aws_s3_bucketname"];
+    process.env["repository_template_provider_aws_s3_prefix"] = OLD_ENV["repository_template_provider_aws_s3_prefix"];
 
     const event: APIGatewayProxyEvent = {
     } as any;
