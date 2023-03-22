@@ -4,15 +4,17 @@ on:
   push:
     branches: [ "main", release/*, story/*, task/* ]
     paths:
-      - 'docs-*/**'
-      - 'pom.xml'
+      - 'src/**'
+      - 'events/**'
+      - 'package.json'
       - '.github/workflows/**'
   pull_request:
     #    branches: [ "main" ]
     types: [opened, synchronize, reopened]
     paths:
-      - 'docs-*/**'
-      - 'pom.xml'
+      - 'src/**'
+      - 'events/**'
+      - 'package.json'
   workflow_dispatch:
 
 env:
