@@ -83,8 +83,8 @@ jobs:
       - name: Run tests
         env:
           repository_template_provider_aws_s3_bucketname: ${{ secrets.TEST_AWS_BUCKETNAME }}
-          repository_template_provider_aws_s3_region": ${{ secrets.TEST_AWS_REGION }}
-          repository_template_provider_aws_s3_prefix": ${{ secrets.TEST_AWS_BUCKET_PREFIX }}
+          repository_template_provider_aws_s3_region: ${{ secrets.TEST_AWS_REGION }}
+          repository_template_provider_aws_s3_prefix: ${{ secrets.TEST_AWS_BUCKET_PREFIX }}
 
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -121,8 +121,8 @@ jobs:
       - name: Run tests
         env:
           repository_template_provider_aws_s3_bucketname: ${{ secrets.TEST_AWS_BUCKETNAME }}
-          repository_template_provider_aws_s3_region": ${{ secrets.TEST_AWS_REGION }}
-          repository_template_provider_aws_s3_prefix": ${{ secrets.TEST_AWS_BUCKET_PREFIX }}
+          repository_template_provider_aws_s3_region: ${{ secrets.TEST_AWS_REGION }}
+          repository_template_provider_aws_s3_prefix: ${{ secrets.TEST_AWS_BUCKET_PREFIX }}
 
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
