@@ -37,10 +37,8 @@ describe('Lambda handler tests - happy path', function () {
       memoryLimitInMB: "512"
     };
 
-    process.env["repository_template_provider_aws_s3_region"] = OLD_ENV["repository_template_provider_aws_s3_region"];
-    process.env["repository_template_provider_aws_s3_bucketname"] = OLD_ENV["repository_template_provider_aws_s3_bucketname"];
-    process.env["repository_template_provider_aws_s3_prefix"] = OLD_ENV["repository_template_provider_aws_s3_prefix"];
-
+    console.log("region: " + process.env["repository.template.provider.aws.s3.region"]);
+    console.log("region: " + OLD_ENV["repository.template.provider.aws.s3.region"]);
     const result: APIGatewayProxyResult =
       await lambdaHandler(event as APIGatewayProxyEvent, testContext as Context);
 
