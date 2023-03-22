@@ -116,9 +116,9 @@ describe('Lambda handler tests - negative tests', function () {
 
   it('Param error - Invalid bucket name', async () => {
 
-    process.env["repository_template_provider_aws_s3_region"] = "us-east-2";
-    process.env["repository_template_provider_aws_s3_bucketname"] = "";
-    process.env["repository_template_provider_aws_s3_prefix"] = "";
+    process.env["REPOSITORY_TEMPLATE_PROVIDER_AWS_S3_REGION"] = "us-east-2";
+    process.env["REPOSITORY_TEMPLATE_PROVIDER_AWS_S3_BUCKETNAME"] = "";
+    process.env["REPOSITORY_TEMPLATE_PROVIDER_AWS_S3_PREFIX"] = "";
 
     const event: APIGatewayProxyEvent = {
     } as any;
@@ -142,9 +142,7 @@ describe('Lambda handler tests - negative tests', function () {
 
   it('Param error - Invalid prefix', async () => {
 
-    process.env["repository_template_provider_aws_s3_region"] = OLD_ENV["repository_template_provider_aws_s3_region"];
-    process.env["repository_template_provider_aws_s3_bucketname"] = OLD_ENV["repository_template_provider_aws_s3_bucketname"];
-    process.env["repository_template_provider_aws_s3_prefix"] = "nonexisting_folder";
+    process.env["REPOSITORY_TEMPLATE_PROVIDER_AWS_S3_PREFIX"] = "nonexisting_folder";
 
     const event: APIGatewayProxyEvent = {
     } as any;
@@ -172,9 +170,7 @@ describe('Lambda handler tests - negative tests', function () {
 
   it('Param error - Wrong region', async () => {
 
-    process.env["repository_template_provider_aws_s3_region"] = "us-east-2";
-    process.env["repository_template_provider_aws_s3_bucketname"] = OLD_ENV["repository_template_provider_aws_s3_bucketname"];
-    process.env["repository_template_provider_aws_s3_prefix"] = OLD_ENV["repository_template_provider_aws_s3_prefix"];
+    process.env["REPOSITORY_TEMPLATE_PROVIDER_AWS_S3_REGION"] = "us-east-2";
 
     const event: APIGatewayProxyEvent = {
     } as any;

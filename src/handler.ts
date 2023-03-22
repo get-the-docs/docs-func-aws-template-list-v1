@@ -30,9 +30,9 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent, context: Contex
   console.log(`Event: ${JSON.stringify(event, null, 2)}`);
   console.log(`Context: ${JSON.stringify(context, null, 2)}`);
 
-  const region = process.env["repository_template_provider_aws_s3_region"]!;
-  const bucketName = process.env["repository_template_provider_aws_s3_bucketname"]!;
-  const prefix = process.env["repository_template_provider_aws_s3_prefix"]!;
+  const region = process.env["REPOSITORY_TEMPLATE_PROVIDER_AWS_S3_REGION"]!;
+  const bucketName = process.env["REPOSITORY_TEMPLATE_PROVIDER_AWS_S3_BUCKETNAME"]!;
+  const prefix = process.env["REPOSITORY_TEMPLATE_PROVIDER_AWS_S3_PREFIX"]!;
 
   const s3Provider : S3Provider = new S3Provider(bucketName, region, prefix);
 
