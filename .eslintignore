@@ -1,0 +1,7 @@
+node_modules/**
+built/**
+dist/**
+out/**
+aws-toolkit-ts-output/**
+.storybook/**
+storybook-static
