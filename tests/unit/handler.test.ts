@@ -118,8 +118,8 @@ describe('Lambda handler tests - negative tests', function () {
   it('Param error - Invalid bucket name', async () => {
 
     process.env["repository.template.provider.aws.s3.region"] = "us-east-2";
-    process.env["repository.template.provider.aws.s3.bucketname"];
-    process.env["repository.template.provider.aws.s3.prefix"];
+    process.env["repository.template.provider.aws.s3.bucketname"] = "";
+    process.env["repository.template.provider.aws.s3.prefix"] = "";
 
     const event: APIGatewayProxyEvent = {
     } as any;
