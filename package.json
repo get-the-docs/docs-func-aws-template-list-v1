@@ -69,7 +69,7 @@
     ]
   },
   "validate-branch-name": {
-    "pattern": "^main$|^release/(v\\d+.\\d+.\\d+){1}$|^(story|task|bug){1}/(GD-\\d+){1}$",
+    "pattern": "^main$|^release/(v\\d+.\\d+.\\d+){1}$|^(story|task|bug){1}/(GD-\\d+-){1}(.)$",
     "errorMsg": "The branch name does not comply with the branching rules"
   },
   "resolutions": {
