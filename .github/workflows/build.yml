@@ -160,6 +160,7 @@ jobs:
       actions: read # only required for a private repository by gitHub/codeql-action/upload-sarif to get the Action run status
       packages: write
     runs-on: ubuntu-latest
+    environment: ci
     steps:
       - uses: actions/checkout@v3
         with:
