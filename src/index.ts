@@ -14,56 +14,60 @@
 import {
   APIGatewayProxyEvent,
   APIGatewayProxyResult,
-  Context
-} from 'aws-lambda';
+  Context,
+} from "aws-lambda";
 
-import {
-  GetTemplatesResponse,
-  TemplateDocument
-} from './gen/api';
+import { GetTemplatesResponse, TemplateDocument } from "./gen/api";
 
-import {
-  S3Provider
-} from './service/s3-provider';
+import { S3Provider } from "./service/s3-provider";
 
-export const lambdaHandler = async (event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> => {
+export const handler = async (
+  event: APIGatewayProxyEvent,
+  context: Context
+): Promise<APIGatewayProxyResult> => {
   console.log(`Event: ${JSON.stringify(event, null, 2)}`);
   console.log(`Context: ${JSON.stringify(context, null, 2)}`);
 
   const region = process.env["REPOSITORY_TEMPLATE_PROVIDER_AWS_S3_REGION"]!;
-  const bucketName = process.env["REPOSITORY_TEMPLATE_PROVIDER_AWS_S3_BUCKETNAME"]!;
+  const bucketName =
+    process.env["REPOSITORY_TEMPLATE_PROVIDER_AWS_S3_BUCKETNAME"]!;
   const prefix = process.env["REPOSITORY_TEMPLATE_PROVIDER_AWS_S3_PREFIX"]!;
 
-  const s3Provider : S3Provider = new S3Provider(bucketName, region, prefix);
+  const s3Provider: S3Provider = new S3Provider(bucketName, region, prefix);
 
-  console.debug(`Listing templates from bucket: s3://${s3Provider.bucketName}/${s3Provider.basePath}...`);
+  console.debug(
+    `Listing templates from bucket: s3://${s3Provider.bucketName}/${s3Provider.basePath}...`
+  );
 
-  const request: any = (event.body) ? JSON.parse(event.body!) : undefined;
-  let templateId : string | undefined;
+  const request: any = event.body ? JSON.parse(event.body!) : undefined;
+  let templateId: string | undefined;
   if (request) {
     templateId = request.templateId;
   }
 
   const templateList: Array<TemplateDocument> | undefined =
-    await s3Provider.listObjects ({
-      Bucket: bucketName,
-      Prefix: (templateId) ? prefix + '/' + templateId : prefix
-    }, []);
+    await s3Provider.listObjects(
+      {
+        Bucket: bucketName,
+        Prefix: templateId ? prefix + "/" + templateId : prefix,
+      },
+      []
+    );
 
   const resultObjects: GetTemplatesResponse = {
-    contents: templateList
+    contents: templateList,
   };
 
-  let result: APIGatewayProxyResult = { statusCode: 500, body: ""};
+  let result: APIGatewayProxyResult = { statusCode: 500, body: "" };
   if (templateList) {
     result = {
-      statusCode: (templateList!.length > 0) ? 200 : 404,
+      statusCode: templateList!.length > 0 ? 200 : 404,
       body: JSON.stringify(resultObjects),
     };
   }
 
-  console.log(`End - Listing templates from bucket: s3://${s3Provider.bucketName}/${s3Provider.basePath}...`)
+  console.log(
+    `End - Listing templates from bucket: s3://${s3Provider.bucketName}/${s3Provider.basePath}...`
+  );
   return result;
 };
-
-
