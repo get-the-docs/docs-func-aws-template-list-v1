@@ -166,7 +166,7 @@ jobs:
         run: yarn build
 
 #      - name: Build the Docker image
-#        working-directory: ./docs-generator-api
+#        working-directory: .
 #        run: docker build -t ${{ env.API_DOCKER_REGISTRY }}/${{ env.API_DOCKER_IMAGE_NAME }} --file Dockerfile .
 
       - name: Set up QEMU
@@ -200,7 +200,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Pull back the Docker image for the Trivy scan
-        working-directory: ./docs-generator-api
+        working-directory: .
         run: docker pull ${{ steps.meta.outputs.tags }}
 
       - name: Run Trivy vulnerability scanner
