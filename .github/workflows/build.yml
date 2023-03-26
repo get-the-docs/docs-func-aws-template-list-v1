@@ -184,14 +184,14 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@v2
+        uses: docker/metadata-action@v4
         with:
           images: ${{ env.API_DOCKER_REGISTRY }}/${{ env.API_DOCKER_IMAGE_NAME }}
           tags: |
             type=sha
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           push: true
