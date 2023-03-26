@@ -153,7 +153,7 @@ jobs:
     name: Containerize
     needs:
       - analyze_job
-    if: github.ref == 'refs/heads/main'
+#    if: github.ref == 'refs/heads/main'
     permissions:
       contents: read # for actions/checkout to fetch code
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
@@ -185,43 +185,33 @@ jobs:
       - name: Build project
         run: yarn build
 
-#      - name: Build the Docker image
-#        working-directory: .
-#        run: docker build -t ${{ env.API_DOCKER_REGISTRY }}/${{ env.API_DOCKER_IMAGE_NAME }} --file Dockerfile .
+#      - name: Set up QEMU
+#        uses: docker/setup-qemu-action@v2
+#
+#      - name: Set up Docker Buildx
+#        uses: docker/setup-buildx-action@v2
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Log in to the Container registry
-        uses: docker/login-action@v2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
         with:
-          registry: ${{ env.API_DOCKER_REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          aws-access-key-id: {{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: {{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: {{ secrets.TEST_AWS_REGION }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ env.API_DOCKER_REGISTRY }}/${{ env.API_DOCKER_IMAGE_NAME }}
-          tags: |
-            type=sha
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4
         with:
           context: .
-          push: true
-#          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Pull back the Docker image for the Trivy scan
-        working-directory: .
-        run: docker pull ${{ steps.meta.outputs.tags }}
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: docs-func-template-list-v1
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
