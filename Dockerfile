@@ -1,8 +1,7 @@
 FROM public.ecr.aws/lambda/nodejs:18
+WORKDIR ${LAMBDA_TASK_ROOT}
 
-COPY app.ts package*.json ./
+COPY dist/* ./
 
-#RUN npm install
-RUN npm ci --production
+CMD ["index.handler"]
 
-CMD ["app.lambdaHandler"]

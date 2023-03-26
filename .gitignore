@@ -83,11 +83,9 @@ dist
 # SAM directories
 .aws-sam
 aws-toolkit-ts-output
+aws-toolkit-tsconfig.json
 built
 gen
-
-.husky
-
 
 /src/.openapi-generator/
 /src/api/
